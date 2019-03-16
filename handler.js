@@ -2,9 +2,10 @@
 
 const { getPage, parsePage, saveRatings } = require('./utilities');
 
-module.exports.hello = async (event) => {
+module.exports.scrape = async (event) => {
   // Fetch Yelp Page
-  getPage(event);
+  getPage(event)
+    .then(page => parsePage(page));
 
   // Parse Page
 
