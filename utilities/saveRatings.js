@@ -1,3 +1,3 @@
-module.exports = () => {
+module.exports = (yelpData) => {
   // Save Yelp Data to DB
 }
