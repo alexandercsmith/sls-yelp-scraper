@@ -3,8 +3,8 @@
 const { getPage, parsePage, saveRatings } = require('./utilities');
 
 module.exports.hello = async (event) => {
-
   // Fetch Yelp Page
+  getPage(event);
 
   // Parse Page
 
