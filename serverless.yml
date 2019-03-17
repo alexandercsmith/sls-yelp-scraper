@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: aws-nodejs # NOTE: update this with your service name
+service: yelp-scraper
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -20,10 +20,24 @@ service: aws-nodejs # NOTE: update this with your service name
 provider:
   name: aws
   runtime: nodejs8.10
+  stage: dev
+  region: us-east-1
+  environment:
+    DYNAMODB_TABLE: yelp-ratings
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
 
-# you can overwrite defaults here
-#  stage: dev
-#  region: us-east-1
+package:
+  include:
+    - utilities/**
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:

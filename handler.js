@@ -9,7 +9,7 @@ module.exports.scrape = async (event) => {
     // Parse Page
     .then(page => parsePage(page))
     // Save Response to DB
-    .then(yelpData => saveRatings(yelpData));
+    .then(yelpData => saveRatings(yelpData, event));
 
   return {
     statusCode: 200,

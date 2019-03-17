@@ -1,6 +1,6 @@
 const request = require('request-promise');
 
-module.exports = bizName => {
-  const url = `https://www.yelp.com/biz/${bizName}`;
+module.exports = businessName => {
+  const url = `https://www.yelp.com/biz/${businessName}`;
   return request({ method: 'GET', url: url });
 }
