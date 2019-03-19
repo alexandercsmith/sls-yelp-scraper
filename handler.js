@@ -18,3 +18,9 @@ module.exports.scrape = async (event) => {
     }))
     .catch(error => callback(new Error(`Error Scraping: ${event} - ${JSON.stringify(error)}`)))
 };
+
+module.exports.launch_scraper = async () => {
+  // List Business'
+
+  // Launch Lambda
+};
