@@ -7,7 +7,7 @@ $ sls invoke local -f scrape -d "yelp-slug"
 
 ## Deployment
 ```bash
-$ sls 
+$ sls deploy -s dev
 ```
 
 ## Build Log
