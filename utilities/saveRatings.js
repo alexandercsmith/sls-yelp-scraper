@@ -17,4 +17,13 @@ module.exports = (yelpData, businessName) => {
       scrapedAt: date
     }
   }
+
+  dB.put(params, error => {
+    if (error) {
+      console.error(`Error saving to Database: ${JSON.stringify(error)}`);
+      return Promise.reject(`Error saving to Database: ${JSON.stringify(error)}`);
+    } else {
+      return Promise.resolve(params.Item);
+    }
+  })
 }
