@@ -3,21 +3,18 @@
 const { getPage, parsePage, saveRatings } = require('./utilities');
 
 module.exports.scrape = async (event) => {
-
   // Fetch Yelp Page
   getPage(event)
     // Parse Page
     .then(page => parsePage(page))
     // Save Response to DB
-    .then(yelpData => saveRatings(yelpData, event));
-
-  return {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: 'Go Serverless v1.0! Your function executed successfully!',
-      input: event,
-    }),
-  };
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
+    .then(yelpData => saveRatings(yelpData, event))
+    // Return Callback
+    .then(() => callback(null, {
+      statusCode: 200,
+      body: JSON.stringify({
+        message: `Scraped: ${event}`
+      }),
+    }))
+    .catch(error => callback(new Error(`Error Scraping: ${event} - ${JSON.stringify(error)}`)))
 };
