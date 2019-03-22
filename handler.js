@@ -1,6 +1,6 @@
 'use strict';
 
-const { getPage, parsePage, saveRatings } = require('./utilities');
+const { getPage, parsePage, saveRatings, deployScrapers } = require('./utilities');
 
 module.exports.scrape = async (event) => {
   // Fetch Yelp Page
@@ -16,11 +16,19 @@ module.exports.scrape = async (event) => {
         message: `Scraped: ${event}`
       }),
     }))
-    .catch(error => callback(new Error(`Error Scraping: ${event} - ${JSON.stringify(error)}`)))
+    .catch(error => callback(new Error(`Error Scraping ${event}: ${JSON.stringify(error)}`)))
 };
 
 module.exports.launch_scraper = async () => {
-  // List Business'
+  // List Business
+  const fakeDatabaseResults = [
+    'urban-light-at-lacma-los-angeles',
+    'the-museum-of-contemporary-art-los-angeles',
+    'the-last-bookstore-los-angeles'
+  ];
 
-  // Launch Lambda
+  // Launch Lambda for each Business
+  fakeDatabaseResults.forEach(businessName => {
+    deployScrapers(businessName);
+  });
 };
